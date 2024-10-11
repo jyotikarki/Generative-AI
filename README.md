@@ -13,7 +13,7 @@ In this hands-on tutorial, we will demonstrate the following:
 
 
 ## Architecture
-![image info](./edrock-architecture.png)
+![image info](./bedrock-architecture.png)
 
 ## ADMIN Application:
     - Build Admin Web application where AdminUser can upload the pdf.
