@@ -6,7 +6,8 @@ on:
 
 env:
   ECR_REPOSITORY: chatwithpdf21  # Update this to your repository name
-  
+  EKS_CLUSTER_NAME: GENAICLUSTER  # Add your EKS cluster name
+  AWS_REGION: us-east-1  # Specify your AWS region here
 
 jobs:
   build:
@@ -14,7 +15,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
     - name: Set short git commit SHA
       id: commit
       uses: prompt/actions-commit-hash@v2
@@ -27,8 +27,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1 # Specify your desired AWS region here
-        audience: sts.amazonaws.com
+        aws-region: ${{ env.AWS_REGION }}
 
     - name: Login to Amazon ECR
       id: login-ecr
@@ -43,7 +42,7 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
     - name: Update kube config
-      run: aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region $AWS_REGION
+      run: aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
 
     - name: Install Helm
       run: |
@@ -52,7 +51,7 @@ jobs:
     - name: Deploy to EKS using Helm
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}        
-        ECR_REPOSITORY: chatbot-app-repository  # Update repository
+        ECR_REPOSITORY: genai # Update repository name here
         IMAGE_TAG: ${{ steps.commit.outputs.short }}
       run: |
         helm upgrade --install chatbot-release ./helm-chart \
