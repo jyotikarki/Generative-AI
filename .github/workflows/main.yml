@@ -76,8 +76,8 @@ jobs:
       
 
       
-    # - name: Print kubeconfig
-    #   run: cat ~/.kube/config
+    - name: Print kubeconfig
+      run: cat ~/.kube/config
       
     - name: Validate AWS credentials
       run: |
