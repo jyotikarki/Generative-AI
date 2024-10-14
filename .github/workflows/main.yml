@@ -8,10 +8,8 @@ env:
   ECR_REPOSITORY: chatwithpdf21  # Update this to your repository name
   EKS_CLUSTER_NAME: GENAICLUSTER  # Add your EKS cluster name
   AWS_REGION: us-east-1  # Specify your AWS region here
-  ROLE_ARN: arn:aws:iam::503561410317:role/GENAI
-   # Add the ARN of the GENAI role 
+  ROLE_ARN: arn:aws:iam::503561410317:role/GENAI  # Add the ARN of the GENAI role 
 
-  
 jobs:
   build:
     name: Deployment
@@ -39,13 +37,23 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
-    - name: Build, tag, and push image to Amazon ECR
+    - name: Build, tag, and push Admin image to Amazon ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}        
         IMAGE_TAG: ${{ steps.commit.outputs.short }}
       run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        # Build and push Admin image
+        docker build -t $ECR_REGISTRY/${{ env.ECR_REPOSITORY }}:admin_gen_ai -f Admin/dockerfile ./Admin
+        docker push $ECR_REGISTRY/${{ env.ECR_REPOSITORY }}:admin_gen_ai
+
+    - name: Build, tag, and push User image to Amazon ECR
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}        
+        IMAGE_TAG: ${{ steps.commit.outputs.short }}
+      run: |
+        # Build and push User image
+        docker build -t $ECR_REGISTRY/${{ env.ECR_REPOSITORY }}:user_gen_ai -f User/dockerfile ./User
+        docker push $ECR_REGISTRY/${{ env.ECR_REPOSITORY }}:user_gen_ai
 
     - name: Update kube config
       run: aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
@@ -57,11 +65,15 @@ jobs:
     - name: Deploy to EKS using Helm
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}        
-        ECR_REPOSITORY: genai  # Update repository name here
+        ECR_REPOSITORY: chatwithpdf21  # Update repository name here
         IMAGE_TAG: ${{ steps.commit.outputs.short }}
       run: |
         helm upgrade --install chatbot-release ./helm-chart \
-        --set image.repository=$ECR_REGISTRY/$ECR_REPOSITORY \
-        --set image.tag=$IMAGE_TAG \
+        --set image.repository=$ECR_REGISTRY/${{ env.ECR_REPOSITORY }} \
+        --set image.tag=admin_gen_ai \
         --namespace chatbot-namespace --create-namespace
 
+        helm upgrade --install user-chatbot-release ./helm-chart \
+        --set image.repository=$ECR_REGISTRY/${{ env.ECR_REPOSITORY }} \
+        --set image.tag=user_gen_ai \
+        --namespace chatbot-namespace --create-namespace
