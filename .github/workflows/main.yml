@@ -88,5 +88,5 @@ jobs:
         
     - name: Deploy Admin to EKS
       run: |
-        kubectl apply -f genai-admin.yaml  --validate=false
-        kubectl apply -f genai-user.yaml  --validate=false
+        kubectl apply -f genai-admin.yaml
+        kubectl apply -f genai-user.yaml
