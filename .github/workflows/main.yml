@@ -61,6 +61,14 @@ jobs:
     - name: Check current context
       run: kubectl config current-context
       
+    - name: Check current context YAML
+      run: aws eks update-kubeconfig --name GENAICLUSTER --region us-east-1
+      
+    - name: Check current context YAML
+      run: kubectl get configmap aws-auth -n kube-system -o yaml
+      
+
+      
     - name: Print kubeconfig
       run: cat ~/.kube/config
       
