@@ -11,8 +11,7 @@ env:
   ROLE_ARN: arn:aws:iam::503561410317:role/GENAI
    # Add the ARN of the GENAI role 
 
-   
-
+  
 jobs:
   build:
     name: Deployment
