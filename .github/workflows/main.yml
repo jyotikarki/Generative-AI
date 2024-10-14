@@ -8,6 +8,7 @@ env:
   ECR_REPOSITORY: chatwithpdf21  # Update this to your repository name
   EKS_CLUSTER_NAME: GENAICLUSTER  # Add your EKS cluster name
   AWS_REGION: us-east-1  # Specify your AWS region here
+  ROLE_ARN: arn:aws:iam::<your-account-id>:role/GENAI  # Add the ARN of the GENAI role
 
 jobs:
   build:
@@ -22,12 +23,14 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
     
-    - name: Configure AWS credentials
+    - name: Assume GENAI Role
       uses: aws-actions/configure-aws-credentials@v1
       with:
+        role-to-assume: ${{ env.ROLE_ARN }}
+        aws-region: ${{ env.AWS_REGION }}
+        role-session-name: GitHubActions-Session
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ env.AWS_REGION }}
 
     - name: Login to Amazon ECR
       id: login-ecr
@@ -51,7 +54,7 @@ jobs:
     - name: Deploy to EKS using Helm
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}        
-        ECR_REPOSITORY: genai # Update repository name here
+        ECR_REPOSITORY: chatbot-app-repository  # Update repository name here
         IMAGE_TAG: ${{ steps.commit.outputs.short }}
       run: |
         helm upgrade --install chatbot-release ./helm-chart \
