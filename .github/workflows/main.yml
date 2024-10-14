@@ -77,7 +77,13 @@ jobs:
 
       
     - name: Print kubeconfig
-      run: cat ~/.kube/config
+      run: |
+        aws eks update-kubeconfig --name GENAICLUSTER --region us-east-1
+
+        kubectl -n kube-system describe configmap aws-auth
+        cat ~/.kube/config
+        aws eks get-token --cluster-name GENAICLUSTER --region us-east-1 --debug
+        kubectl get nodes
       
     - name: Validate AWS credentials
       run: |
