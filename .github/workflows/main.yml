@@ -8,7 +8,9 @@ env:
   ECR_REPOSITORY: chatwithpdf21  # Update this to your repository name
   EKS_CLUSTER_NAME: GENAICLUSTER  # Add your EKS cluster name
   AWS_REGION: us-east-1  # Specify your AWS region here
-   # Add the ARN of the GENAI role
+   # Add the ARN of the GENAI role 
+
+   
 
 jobs:
   build:
