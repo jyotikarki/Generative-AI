@@ -126,9 +126,14 @@ env:
   - name: BUCKET_NAME
     value: "chatwithpdf21"
   - name: AWS_ACCESS_KEY_ID
-    value: "AKIAXKPUZK4GTJJY546L"
+    valueFrom:
+      secretKeyRef:
+        name: aws-credentials
+        key: AWS_ACCESS_KEY_ID
   - name: AWS_SECRET_ACCESS_KEY
-    value: "a4ZDrI11HnkJEfG0GzVmBZMOTstLnfaRpfdUdoLK"
+    valueFrom:
+      secretKeyRef:
+        name: aws-credentials
+        key: AWS_SECRET_ACCESS_KEY
   - name: AWS_DEFAULT_REGION
     value: "us-east-1"
-
