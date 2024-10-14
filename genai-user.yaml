@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: genai-user
+  labels:
+    app: genai-user
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: genai-user
+  template:
+    metadata:
+      labels:
+        app: genai-user
+    spec:
+      containers:
+      - name: genai-user
+        image: 503561410317.dkr.ecr.us-east-1.amazonaws.com/genai:user_gen_ai  # User Docker image
+        ports:
+        - containerPort: 8084  # Port that the container listens on
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: genai-user-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8084          # Port exposed by the service
+    targetPort: 8084    # Port to forward traffic to in the container
+  selector:
+    app: genai-user      # This should match the labels defined in the deployment
