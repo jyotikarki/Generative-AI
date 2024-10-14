@@ -63,7 +63,9 @@ jobs:
         aws-region: ${{env.AWS_DEFAULT_REGION}}
          
     - name: Update kube config
-      run: aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
+      run: |
+        aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
+        
     
     # - name: Check current context
     #   run: kubectl config current-context
