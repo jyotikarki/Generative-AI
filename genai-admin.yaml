@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: genai-admin
+  labels:
+    app: genai-admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: genai-admin
+  template:
+    metadata:
+      labels:
+        app: genai-admin
+    spec:
+      containers:
+      - name: genai-admin
+        image: 503561410317.dkr.ecr.us-east-1.amazonaws.com/genai:admin_gen_ai  # Admin Docker image
+        ports:
+        - containerPort: 8084  # Port that the container listens on
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: genai-admin-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8084          # Port exposed by the service
+    targetPort: 8084    # Port to forward traffic to in the container
+  selector:
+    app: genai-admin      # This should match the labels defined in the deployment
