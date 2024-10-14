@@ -5,9 +5,22 @@ import uuid
 
 ## s3_client
 # s3_client = boto3.client("s3")
-s3_client = boto3.client("s3", region_name="us-east-1")
+# s3_client = boto3.client("s3", region_name="us-east-1")
+
+# BUCKET_NAME = os.getenv("BUCKET_NAME")
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+AWS_DEFAULT_REGION = os.getenv("AWS_DEFAULT_REGION")
+s3_client = boto3.client(
+    "s3",
+    region_name=AWS_DEFAULT_REGION,
+    aws_access_key_id=AWS_ACCESS_KEY_ID,
+    aws_secret_access_key=AWS_SECRET_ACCESS_KEY
+)
 
 BUCKET_NAME = os.getenv("BUCKET_NAME")
+
+
 
 ## Bedrock
 from langchain_community.embeddings import BedrockEmbeddings
