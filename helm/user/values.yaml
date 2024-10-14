@@ -1,4 +1,4 @@
-# Default values for user.
+# Default values for admin.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -7,11 +7,11 @@ replicaCount: 1
 
 # This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
 image:
-  repository: jyotikarki/user_gen_ai        
+  repository: jyotikarki/admin_gen_ai
   # This sets the pull policy for images.
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "01"
+  tag: "03"
 
 # This is for the secretes for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 imagePullSecrets: []
@@ -54,7 +54,7 @@ service:
   # This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
   type: NodePort
   # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
-  port: 8085
+  port: 8084
 
 # This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ingress:
@@ -124,16 +124,22 @@ affinity: {}
 
 env:
   - name: BUCKET_NAME
-    value: "chatwithpdf21"
+    valueFrom:
+      secretKeyRef:
+        name: aws-secrets1
+        key: bucket_name
   - name: AWS_ACCESS_KEY_ID
     valueFrom:
       secretKeyRef:
-        name: aws-credentials
-        key: AWS_ACCESS_KEY_ID
+        name: aws-secrets1
+        key: aws_access_key_id
   - name: AWS_SECRET_ACCESS_KEY
     valueFrom:
       secretKeyRef:
-        name: aws-credentials
-        key: AWS_SECRET_ACCESS_KEY
+        name: aws-secrets1
+        key: aws_secret_access_key
   - name: AWS_DEFAULT_REGION
-    value: "us-east-1"
+    valueFrom:
+      secretKeyRef:
+        name: aws-secrets1
+        key: aws_default_region
