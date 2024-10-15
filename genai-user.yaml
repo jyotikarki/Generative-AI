@@ -18,7 +18,7 @@ spec:
       - name: genai-user
         image: 503561410317.dkr.ecr.us-east-1.amazonaws.com/genai:user_gen_ai  # User Docker image
         ports:
-        - containerPort: 8084  # Port that the container listens on
+        - containerPort: 8085  # Port that the container listens on
 
 ---
 
@@ -29,7 +29,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 8084          # Port exposed by the service
-    targetPort: 8084    # Port to forward traffic to in the container
+  - port: 8085          # Port exposed by the service
+    targetPort: 8085    # Port to forward traffic to in the container
   selector:
     app: genai-user      # This should match the labels defined in the deployment
