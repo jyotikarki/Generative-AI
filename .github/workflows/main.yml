@@ -54,24 +54,11 @@ jobs:
         # Build and push User image
         docker build -t $ECR_REGISTRY/${{ env.ECR_REPOSITORY }}:user_gen_ai -f User/dockerfile ./User
         docker push $ECR_REGISTRY/${{ env.ECR_REPOSITORY }}:user_gen_ai
-     
-         
+
     - name: Update kube config
       run: |
         aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
-        
     
-    # - name: Check current context
-    #   run: kubectl config current-context
-      
-    # - name: Check current context YAML
-    #   run: aws eks update-kubeconfig --name GENAICLUSTER --region us-east-1
-      
-    # - name: Check current context YAML
-    #   run: kubectl get configmap aws-auth -n kube-system -o yaml
-      
-
-      
     - name: Validate AWS credentials
       run: |
         aws sts get-caller-identity
@@ -83,5 +70,7 @@ jobs:
     - name: Deploy Admin to EKS
       run: |
         kubectl apply -f genai-admin.yaml --validate=false
+        
+    - name: Deploy User to EKS
+      run: |
         kubectl apply -f genai-user.yaml --validate=false
-
