@@ -4,11 +4,13 @@ import os
 import uuid
 
 ## s3_client
-# s3_client = boto3.client("s3", region_name="us-east-1")
-# BUCKET_NAME = os.getenv("BUCKET_NAME")
-AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
-AWS_DEFAULT_REGION = os.getenv("AWS_DEFAULT_REGION")
+AWS_ACCESS_KEY_ID= "AKIAXKPUZK4GTJJY546L"
+AWS_SECRET_ACCESS_KEY= "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"
+AWS_DEFAULT_REGION= "us-east"
+BUCKET_NAME= "chatwithpdf21"
+# AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+# AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+# AWS_DEFAULT_REGION = os.getenv("AWS_DEFAULT_REGION")
 s3_client = boto3.client(
     "s3",
     region_name=AWS_DEFAULT_REGION,
