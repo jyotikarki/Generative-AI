@@ -80,8 +80,8 @@ jobs:
       run: |
         aws eks list-clusters --region ${{ env.AWS_REGION }}
         
-    -- name: Deploy Admin to EKS
-       run: |
-         kubectl apply -f genai-admin.yaml --validate=false
-         kubectl apply -f genai-user.yaml --validate=false
+    - name: Deploy Admin to EKS
+      run: |
+        kubectl apply -f genai-admin.yaml --validate=false
+        kubectl apply -f genai-user.yaml --validate=false
 
