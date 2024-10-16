@@ -7,7 +7,7 @@ on:
 env:
 
   ECR_REPOSITORY: eks_admindemo # Update this to your repository name
-  EKS_CLUSTER_NAME: GENAICLUSTER  # Add your EKS cluster name
+  EKS_CLUSTER_NAME: eksdemoadmin02  # Add your EKS cluster name
   AWS_REGION: us-east-1  # Specify your AWS region here
   # ROLE_ARN: arn:aws:iam::503561410317:role/GENAI  # Add the ARN of the GENAI role 
 
@@ -60,18 +60,18 @@ jobs:
       run: |
         aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
     
-    - name: Validate AWS credentials
-      run: |
-        aws sts get-caller-identity
+    # - name: Validate AWS credentials
+    #   run: |
+    #     aws sts get-caller-identity
       
-    - name: Validate AWS credentials
-      run: |
-        aws eks list-clusters --region ${{ env.AWS_REGION }}
+    # - name: Validate AWS credentials
+    #   run: |
+    #     aws eks list-clusters --region ${{ env.AWS_REGION }}
         
     - name: Deploy Admin to EKS
       run: |
-        kubectl apply -f genai-admin.yaml --validate=false
+        kubectl apply -f genai-admin.yaml
         
     - name: Deploy User to EKS
       run: |
-        kubectl apply -f genai-user.yaml --validate=false
+        kubectl apply -f genai-user.yaml
