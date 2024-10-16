@@ -1,0 +1,124 @@
+{
+    "Quotas": [
+        {
+            "ServiceCode": "eks",
+            "ServiceName": "Amazon Elastic Kubernetes Service (Amazon EKS)",
+            "QuotaArn": "arn:aws:servicequotas:us-east-1:503561410317:eks/L-11427A54",
+            "QuotaCode": "L-11427A54",
+            "QuotaName": "Control plane security groups per cluster",
+            "Value": 4.0,
+            "Unit": "None",
+            "Adjustable": false,
+            "GlobalQuota": false,
+            "QuotaAppliedAtLevel": "ACCOUNT"
+        },
+        {
+            "ServiceCode": "eks",
+            "ServiceName": "Amazon Elastic Kubernetes Service (Amazon EKS)",
+            "QuotaArn": "arn:aws:servicequotas:us-east-1:503561410317:eks/L-EA277FDC",
+            "QuotaCode": "L-EA277FDC",
+            "QuotaName": "EKS Anywhere Enterprise Subscriptions",
+            "Value": 10.0,
+            "Unit": "None",
+            "Adjustable": true,
+            "GlobalQuota": false,
+            "QuotaAppliedAtLevel": "ACCOUNT"
+        },
+        {
+            "ServiceCode": "eks",
+            "ServiceName": "Amazon Elastic Kubernetes Service (Amazon EKS)",
+            "QuotaArn": "arn:aws:servicequotas:us-east-1:503561410317:eks/L-FDFA5F81",
+            "QuotaCode": "L-FDFA5F81",
+            "QuotaName": "Registered clusters",
+            "Value": 10.0,
+            "Unit": "None",
+            "Adjustable": true,
+            "GlobalQuota": false,
+            "QuotaAppliedAtLevel": "ACCOUNT"
+        },
+        {
+            "ServiceCode": "eks",
+            "ServiceName": "Amazon Elastic Kubernetes Service (Amazon EKS)",
+            "QuotaArn": "arn:aws:servicequotas:us-east-1:503561410317:eks/L-BD136A63",
+            "QuotaCode": "L-BD136A63",
+            "QuotaName": "Nodes per managed node group",
+            "Value": 450.0,
+            "Unit": "None",
+            "Adjustable": true,
+            "GlobalQuota": false,
+            "QuotaAppliedAtLevel": "ACCOUNT"
+        },
+        {
+            "ServiceCode": "eks",
+            "ServiceName": "Amazon Elastic Kubernetes Service (Amazon EKS)",
+            "QuotaArn": "arn:aws:servicequotas:us-east-1:503561410317:eks/L-33415657",
+            "QuotaCode": "L-33415657",
+            "QuotaName": "Fargate profiles per cluster",
+            "Value": 10.0,
+            "Unit": "None",
+            "Adjustable": true,
+            "GlobalQuota": false,
+            "QuotaAppliedAtLevel": "ACCOUNT"
+        },
+        {
+            "ServiceCode": "eks",
+            "ServiceName": "Amazon Elastic Kubernetes Service (Amazon EKS)",
+            "QuotaArn": "arn:aws:servicequotas:us-east-1:503561410317:eks/L-23414FF3",
+            "QuotaCode": "L-23414FF3",
+            "QuotaName": "Label pairs per Fargate profile selector",
+            "Value": 5.0,
+            "Unit": "None",
+            "Adjustable": true,
+            "GlobalQuota": false,
+            "QuotaAppliedAtLevel": "ACCOUNT"
+        },
+        {
+            "ServiceCode": "eks",
+            "ServiceName": "Amazon Elastic Kubernetes Service (Amazon EKS)",
+            "QuotaArn": "arn:aws:servicequotas:us-east-1:503561410317:eks/L-D78D8AF8",
+            "QuotaCode": "L-D78D8AF8",
+            "QuotaName": "Selectors per Fargate profile",
+            "Value": 5.0,
+            "Unit": "None",
+            "Adjustable": true,
+            "GlobalQuota": false,
+            "QuotaAppliedAtLevel": "ACCOUNT"
+        },
+        {
+            "ServiceCode": "eks",
+            "ServiceName": "Amazon Elastic Kubernetes Service (Amazon EKS)",
+            "QuotaArn": "arn:aws:servicequotas:us-east-1:503561410317:eks/L-6D54EA21",
+            "QuotaCode": "L-6D54EA21",
+            "QuotaName": "Managed node groups per cluster",
+            "Value": 30.0,
+            "Unit": "None",
+            "Adjustable": true,
+            "GlobalQuota": false,
+            "QuotaAppliedAtLevel": "ACCOUNT"
+        },
+        {
+            "ServiceCode": "eks",
+            "ServiceName": "Amazon Elastic Kubernetes Service (Amazon EKS)",
+            "QuotaArn": "arn:aws:servicequotas:us-east-1:503561410317:eks/L-93A74D60",
+            "QuotaCode": "L-93A74D60",
+            "QuotaName": "Public endpoint access CIDR ranges per cluster",
+            "Value": 40.0,
+            "Unit": "None",
+            "Adjustable": false,
+            "GlobalQuota": false,
+            "QuotaAppliedAtLevel": "ACCOUNT"
+        },
+        {
+            "ServiceCode": "eks",
+            "ServiceName": "Amazon Elastic Kubernetes Service (Amazon EKS)",
+            "QuotaArn": "arn:aws:servicequotas:us-east-1:503561410317:eks/L-1194D53C",
+            "QuotaCode": "L-1194D53C",
+            "QuotaName": "Clusters",
+            "Value": 100.0,
+            "Unit": "None",
+            "Adjustable": true,
+            "GlobalQuota": false,
+            "QuotaAppliedAtLevel": "ACCOUNT"
+        }
+    ]
+}
